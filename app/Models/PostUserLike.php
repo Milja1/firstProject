@@ -13,7 +13,7 @@ class PostUserLike extends Model
 {
     use HasFactory;
 
-    // возможность вносить в поля таблицы изменения
+    
     protected $table = 'post_user_likes';
-    protected $guarded = false;
+    protected $guarded = false; // возможность вносить в поля таблицы изменения
 }

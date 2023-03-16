@@ -15,9 +15,9 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes; // 'мягкое удаление'
 
-    // возможность вносить в поля таблицы изменения
+    
     protected $table = 'posts';
-    protected $guarded = false;
+    protected $guarded = false; // возможность вносить в поля таблицы изменения
 
     protected $withCount = ['likedUsers'];  // количество лайков
     protected $with = ['category'];         // оптимизация количества запросов !!!!!!!!!!!!! по методу category()

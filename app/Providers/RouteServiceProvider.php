@@ -20,18 +20,14 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
-     * The controller namespace for the application.
-     *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
+     * для упрощения подключений к Route
+     * ракоментировать protected $namespace = 'App\\Http\\Controllers';
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
+     * для разделения Route по разным файлам
+     * дополняем Route::middleware('web')
      */
     public function boot()
     {
@@ -45,7 +41,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+                ->group(function () {
+                    require_once base_path('routes/web.php');
+                    require_once base_path('routes/admin.php');
+                    // require_once base_path('routes/personal.php');
+                    // require_once base_path('routes/posts.php');
+                });
         });
     }
 

@@ -16,9 +16,9 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes; // 'трейд' для 'мягкого удаления'
 
-    // возможность вносить в поля таблицы изменения
+    
     protected $table = 'categories';
-    protected $guarded = false;
+    protected $guarded = false; // возможность вносить в поля таблицы изменения
 
     /**
      * для получание данных из таблицы БД 'posts'

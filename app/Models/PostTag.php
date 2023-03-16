@@ -13,7 +13,7 @@ class PostTag extends Model
 {
     use HasFactory;
 
-    // возможность вносить в поля таблицы изменения
+    
     protected $table = 'post_tags';
-    protected $guarded = false;
+    protected $guarded = false; // возможность вносить в поля таблицы изменения
 }

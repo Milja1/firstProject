@@ -14,9 +14,9 @@ class Comment extends Model
 {
     use HasFactory;
 
-    // возможность вносить в поля таблицы изменения
+    
     protected $table = 'comments';
-    protected $guarded = false;
+    protected $guarded = false; // возможность вносить в поля таблицы изменения
 
     /**
      * для получание данных из таблицы БД 'users'
