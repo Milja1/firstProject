@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * автоматически созданная модель
+ * создаем базу данных
+ * в поле DB_DATABASE файла '.env'
+ * задаем название созданной БД
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;

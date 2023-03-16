@@ -4,12 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * автоматически созданная миграция
+ * создаем базу данных
+ * в поле DB_DATABASE файла '.env'
+ * задаем название созданной БД
+ */
+
 class CreateUsersTable extends Migration
 {
     /**
-     * Run the migrations.
-     *
-     * @return void
+     * 'накат' миграции - 'php artisan migrate'
      */
     public function up()
     {
@@ -25,12 +30,14 @@ class CreateUsersTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
-     *
-     * @return void
+     * 'откат' миграции
+     * php artisan migrate:rollback
+     *  
+     * для контроля рекомендуется 
+     * после 'наката' 'откатить' потом снова 'накатить'
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users');    // по команде удаляется вся таблица
     }
 }
