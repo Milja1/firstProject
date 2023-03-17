@@ -54,18 +54,9 @@
         </nav>
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+       @include('admin.includes.sidebar') <!-- вставка из resources\views\admin\includes\sidebar.blade.php -->
 
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-
-            </div>
-            <!-- /.sidebar -->
-        </aside>
-
-        @yield('content') <!-- место вставки из resources\views\admin\main\index.blade.php -->
+        @yield('content') <!-- расширение из resources\views\admin\main\index.blade.php -->
 
         <footer class="main-footer">
             <strong>Blog</strong>

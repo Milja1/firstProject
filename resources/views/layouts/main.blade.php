@@ -73,8 +73,7 @@
         </div>
     </header>
 
-@yield('content')   <!-- место вставки из resources\views\main\index.blade.php -->
-
+@yield('content')   <!-- расширение из resources\views\main\index.blade.php -->
    
     <footer class="edica-footer" data-aos="fade-up">
         <div class="container">
