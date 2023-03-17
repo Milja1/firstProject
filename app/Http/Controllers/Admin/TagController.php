@@ -58,7 +58,7 @@ class TagController extends Controller
 	}
 
 	/**
-	 * сохранение редактированого тега в БД
+	 * сохранение изменений тега в БД
 	 */
 	public function update(UpdateRequest $request, Tag $tag)
 	{
