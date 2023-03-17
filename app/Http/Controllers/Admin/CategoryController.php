@@ -17,70 +17,63 @@ class CategoryController extends Controller
 	/**
 	 * просмотр всех категорий
 	 */
-    public function index()
-    {
-        $categories = Category::all();           // получаем из БД список всех категорий
-        return view('admin.categories.index', compact('categories')); // полученный список передаем на страницу для вывода
-    }
+	public function index()
+	{
+		$categories = Category::all();           // получаем из БД список всех категорий
+		return view('admin.category.index', compact('categories')); // полученный список передаем на страницу для вывода
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-        return view('admin.categories.create');
-    }
+	/**
+	 * создание категории
+	 */
+	public function create()
+	{
+		return view('admin.category.create');
+	}
 
-    /**
-     * добавление категорий в БД
-     */
-    public function store(StoreRequest $request)
-    {
-        $data = $request->validated(); // получение из формы запроса 'Добавление категорий' отвалидированных данных
-        Category::firstOrCreate($data); // добавляем в базу данных с проверкой данных на уникальность 
-        return redirect()->route('admin.category.index');
-    }
+	/**
+	 * добавление категорий в БД
+	 */
+	public function store(StoreRequest $request)
+	{
+		$data = $request->validated(); // получение из формы запроса 'Добавление категорий' отвалидированных данных
+		Category::firstOrCreate($data); // добавляем в базу данных с проверкой данных на уникальность 
+		return redirect()->route('admin.category.index');
+	}
 
-    /**
-     * просмотр одной категории
-     */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show', compact('category'));
-    }
+	/**
+	 * просмотр одной категории
+	 */
+	public function show(Category $category)
+	{
+		return view('admin.category.show', compact('category'));
+	}
 
-    /**
-     * редактиролвание одной категории
-     */
-    public function edit(Category $category)
-    {
-        return view('admin.categories.edit', compact('category'));
-    }
+	/**
+	 * редактирование одной категории
+	 */
+	public function edit(Category $category)
+	{
+		return view('admin.category.edit', compact('category'));
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRequest $request, Category $category)
-    {
-        $data = $request->validated();  // получаем из формы массив отвалидированных данных
-        $category->update($data);       // сохраняем в базу данных изменения
+	/**
+	 * внесение изменений в БД 
+	 */
+	public function update(UpdateRequest $request, Category $category)
+	{
+		$data = $request->validated();  // получаем из формы массив отвалидированных данных
+		$category->update($data);       // сохраняем в базу данных изменения
 
-         return view('admin.categories.show', compact('category'));
-    }
+		return view('admin.category.show', compact('category'));
+	}
 
-    /**
-     * удаление категории
-     */
-    public function delete(Category $category)
-    {
-        $category->delete();
-        return redirect()->route('admin.category.index');
-    }
+	/**
+	 * удаление категории
+	 */
+	public function delete(Category $category)
+	{
+		$category->delete();
+		return redirect()->route('admin.category.index');
+	}
 }

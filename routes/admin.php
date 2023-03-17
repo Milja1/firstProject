@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController; // подключение
 use App\Http\Controllers\Admin\MainController;     // подключение
+use App\Http\Controllers\Admin\TagController; 	   // подключение
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,16 @@ Route::prefix('admin')->/*middleware('auth', 'admin')->*/group( function () { //
         Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::patch('/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::delete('/{category}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+    });
+
+	Route::prefix('tags')->group(function() {
+        Route::get('/', [TagController::class, 'index'])->name('admin.tag.index');
+        Route::get('/create', [TagController::class, 'create'])->name('admin.tag.create');
+        Route::post('/create', [TagController::class, 'store'])->name('admin.tag.store');
+        Route::get('/{tag}', [TagController::class, 'show'])->name('admin.tag.show');
+        Route::get('/{tag}/edit', [TagController::class, 'edit'])->name('admin.tag.edit');
+        Route::patch('/{tag}', [TagController::class, 'update'])->name('admin.tag.update');
+        Route::delete('/{tag}', [TagController::class, 'delete'])->name('admin.tag.delete');
     });
 });
 
