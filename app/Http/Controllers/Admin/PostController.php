@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Posts\StoreRequest; // подключение
-use App\Http\Requests\Admin\UpdateRequest;
+use App\Http\Controllers\Admin\BaseController;
+use App\Http\Requests\Admin\Posts\StoreRequest;  // подключение
+use App\Http\Requests\Admin\Posts\UpdateRequest; // подключение
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;  // подключение
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 /**
  * php artisan make:controller Admin/PostController --resource
+ * 
+ * т.к. применяется используется класс PostService
+ * изменяем extends (наследование) от BaseController
  */
 
-class PostController extends Controller
+class PostController extends BaseController
 {
     /**
      * просмотр всех постов
@@ -32,22 +36,18 @@ class PostController extends Controller
     public function create()
     {
 		$categories = Category::all();                             // получаем все категории из таблицы базы данных
-        //$tags = Tag::all();                                        // получаем все теги из таблицы базы данных
-        return view('admin.post.create', compact('categories'/* , 'tags' */));   // передаем их для отображения на стр. resources\views\admin\post\create.blade.php
+        $tags = Tag::all();                                        // получаем все теги из таблицы базы данных
+        return view('admin.post.create', compact('categories', 'tags'));   // передаем их для отображения на стр. resources\views\admin\post\create.blade.php
     }
 
     /**
      * добавление поста в БД
      */
     public function store(StoreRequest $request)
-    {
-        $data = $request->validated();
-		$data['preview_image'] = Storage::put('/images', $data['preview_image']); // переопределяем значение из формы как путь (Storage::put) в месту попадания файла в storage\app\images
-		$data['main_image'] = Storage::put('/images', $data['main_image']);        // -- // --
+    {   
+		$data = $request->validated();
+		$this->service->store($data);   // обрабатываем полученныеы из БД данные с помощью метода 'store' из app\Service\PostService.php
 		
-		Post::firstOrCreate($data); // передаем путь хранения файла в таблицу 'posts' (прикрепляем к объекту созданному на базе класса Post)
-        //$this->service->store($data);   // обрабатываем полученныеы данные с помощью метода 'store' из app\Service\PostService.php
-        
         return redirect()->route('admin.post.index');      // переадресация
     }
 
@@ -64,7 +64,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.post.edit', compact('post'));
+		$categories = Category::all();                             // получаем все категории из таблицы базы данных
+        $tags = Tag::all();                                        // получаем все теги из таблицы базы данных
+
+        return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -73,9 +76,9 @@ class PostController extends Controller
     public function update(UpdateRequest $request, Post $post)
     {
         $data = $request->validated();                // получаем из формы массив отвалидированных данных
-        $post = $this->service->update($data, $post); // обрабатываем полученныеы данные с помощью метода 'update' из app\Service\PostService.php
-
-        return view('admin.post.show', compact('post')); // вывод полученного результата 
+		$post = $this->service->update($data, $post); // обрабатываем полученныеы данные с помощью метода 'update' из app\Service\PostService.php	
+		
+		return view('admin.post.show', compact('post')); // вывод полученного результата 
     }
 
     /**

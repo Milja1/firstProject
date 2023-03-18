@@ -5,13 +5,13 @@ namespace App\Http\Requests\Admin\Posts;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * php artisan make:request Admin/StorePostsRequest
+ * php artisan make:request Admin/Posts/UpdateRequest
  */
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
-     * авторизован ли пользователь для отправки этого запроса
+     *авторизован ли пользователь для отправки этого запроса
      */
     public function authorize()
     {
@@ -26,11 +26,11 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'preview_image' => 'required|file',
-            'main_image' => 'required|file',
+            'preview_image' => 'nullable|file',
+            'main_image' => 'nullable|file',
             'category_id' => 'required|integer|exists:categories,id', // 'exists' - в таблице 'categories' в колонке 'category_id', соответсвующей 'id' должно быть значение 
             'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|integer|exists:tags,id', // 'exists' - в таблице 'tags' в колонке 'tag_id', соответсвующей !!!нескольким 'id' должно быть значение 
+            'tag_ids.*' => 'nullable|integer|exists:tags,id', // 'exists' - в таблице 'tags' в колонке 'tag_id', соответсвующей !!!нескольким 'id' должно быть значение
         ];
     }
 }

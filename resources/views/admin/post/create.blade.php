@@ -91,8 +91,19 @@
 							<label>{{ __('Выберите категорию') }}</label>
 							<select name="category_id" class="form-control">
 								@foreach($categories as $category)
-								<option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }} {{-- при редактировании формы будет показана предыдущая категорию  --}}>{{ $category->title }}</option>
+								{{-- при редактировании формы будет показана предыдущая категорию  --}}
+								<option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{ $category->title }}</option>
 								@endforeach
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label>{{ __('Теги') }}</label>
+							<select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="{{ __('Выберите теги') }}" style="width: 100%;">
+								@foreach($tags as $tag)
+									{{-- проверяем: если данные в поле формы являются массивом и их значения входят в общий массив созданных тегов то, эти значения добавляем в поле формы иначе - пустая строка --}}
+									<option {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->title }}</option>
+								@endforeach									
 							</select>
 						</div>
 

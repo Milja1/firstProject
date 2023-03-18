@@ -21,7 +21,8 @@
     <title>AdminLTE 3 | Dashboard</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
@@ -68,6 +69,7 @@
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 	<script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -93,6 +95,7 @@
 		$(function () {
   			bsCustomFileInput.init();
 		});
+		$('.select2').select2()
 	</script>
 	
 	<!-- заменяем Browse в полях прикрепления изображений -->
