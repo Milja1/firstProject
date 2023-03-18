@@ -27,7 +27,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
+            'email' => 'required|string|email|unique:users,email,' . $this->user_id, // уникальная запись в поле email таблицы 'users' по 'id' пользователя
+			'user_id' => 'required|integer|exists:users,id', // 'exists' - в таблице 'users' в колонке 'user_id', соответсвующей 'id' должно быть значение 
+			'role' => 'required|integer',
         ];
     }
 
