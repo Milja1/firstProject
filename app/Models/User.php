@@ -30,8 +30,8 @@ class User extends Authenticatable
      * т.е. если в поле стоит какое-то значение определяем что под ним понимается
      * 
      */
-    const ROLE_ADMIN = 0;
-    const ROLE_READER = 1;
+    const ROLE_ADMIN = 1;
+    const ROLE_READER = 0;
  
     public static function getRoles()
     {

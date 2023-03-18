@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('admin')->/*middleware('auth', 'admin')->*/group(function () { // 'middleware' в порядке очередности проверки => 'auth' - проверка авторизован ли пользователь 'admin', 'admin' - проверка является ли он адинимистратором
+Route::prefix('admin')->/* middleware('auth', 'admin')-> */group(function () { 
 	Route::get('/', [MainController::class, 'index'])->name('admin.main.index');
+	/* 'middleware' в порядке очередности проверки:	
+		'auth' - проверка авторизован ли пользователь (создан по умолчанию см.  app\Http\Kernel.php)
+		'admin' - проверка является ли он адинимистратором (создан в app\Http\Middleware\AdminMiddleware.php)
+	*/	
 
 	Route::prefix('posts')->group(function () {
 		Route::get('/', [PostController::class, 'index'])->name('admin.post.index');
