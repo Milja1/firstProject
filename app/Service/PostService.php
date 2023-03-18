@@ -20,29 +20,29 @@ class PostService
 	public function store($data)
 	{
 		try {     // транзакция для ...........
-		DB::beginTransaction();
+			DB::beginTransaction();
 			// получаем из формы массив отвалидированных данных
-			if (isset($data['tag_ids'])){     // проверяем заполнен ли в форме массив тегов
+			if (isset($data['tag_ids'])) {     // проверяем заполнен ли в форме массив тегов
 				$tagIds = $data['tag_ids'];   // получаем теги из формы по name
-				unset($data['tag_ids']);      // ощищаем введенный в форму массив тегов
+				unset($data['tag_ids']);      // очищаем введенный в форму массив тегов
 			}
 
 			/* 
 			прикрепленные к форме файлы сохраняются в "storage\app\public\images" на которую имеет символическую ссылку "public\storage\images"
 			в таблице БД сохраняется строка с информацией о пути к месту хранения файлов
-			*/  
-			$data['preview_image'] = Storage::disk('public')->put('/images',  $data['preview_image']); 
+			*/
+			$data['preview_image'] = Storage::disk('public')->put('/images',  $data['preview_image']);
 			$data['main_image'] = Storage::disk('public')->put('/images',  $data['main_image']);
 
 			$post = Post::firstOrCreate($data);   // добавляем в базу данные из формы с проверкой на уникальность			
-			 
-			if (isset($tagIds)){
-				$post->tags()->attach($tagIds);
+
+			if (isset($tagIds)) {
+				$post->tags()->attach($tagIds); // добавление в БД данных при отношения 'многие ко многим'
 			}
-			
-	 	DB::commit();
-	 	} catch (Exception $exception) {
-		DB::rollBack();
+
+			DB::commit();
+		} catch (Exception $exception) {
+			DB::rollBack();
 			abort(500); // нарушение работы на стороне сервиса
 		}
 	}
@@ -52,34 +52,34 @@ class PostService
 	 */
 	public function update($data, $post)
 	{
-	 	try {    // транзакция для ...........
-		DB::beginTransaction();
-			if (isset( $data['tag_ids'])) {   // проверяем заполнен ли в форме ли массив тегов     
+		try {    // транзакция для ...........
+			DB::beginTransaction();
+			if (isset($data['tag_ids'])) {   // проверяем заполнен ли в форме ли массив тегов     
 				$tagIds = $data['tag_ids'];   // получаем теги из формы по name
-				unset($data['tag_ids']);      // ощищаем введенный в форму массив тегов
+				unset($data['tag_ids']);      // очищаем введенный в форму массив тегов
 			}
 
 			/* 
 			прикрепленные к форме файлы сохраняются в "storage\app\public\images" на которую имеет символическую ссылку "public\storage\images"
 			в таблице БД сохраняется строка с информацией о пути к месту хранения файлов
-			*/      
+			*/
 			if (isset($data['preview_image'])) {        // если в таблице БД есть запись о пути к месту хранения файлов 			
 				$data['preview_image'] = Storage::disk('public')->put('/images',  $data['preview_image']);  // то в таблице БД сохраняем либо старую запис, либо заменяем её на новую
 			}
-			if (isset($data['main_image'])) { 			  
+			if (isset($data['main_image'])) {
 				$data['main_image'] = Storage::disk('public')->put('/images',  $data['main_image']);
 			}
 			$post->update($data);   // сохраняем в базу данных изменения
 
-			if (isset($tagIds)){
-				$post->tags()->sync($tagIds); 
+			if (isset($tagIds)) {
+				$post->tags()->sync($tagIds); // заменяем значения в таблице БД 
 			}
-						
-		DB::commit();
+
+			DB::commit();
 		} catch (Exception $exception) {
-		DB::rollBack();
+			DB::rollBack();
 			abort(500);   // нарушение работы на стороне сервиса
 		}
-			return $post;
+		return $post;
 	}
 }

@@ -31,7 +31,7 @@
 							{{-- при ошибке в валидации --}}
 							@error('title')
 							<div class="text-danger">
-								{{ __('Поле не заполнено либо заполнено неправильно') }}
+								{{ $message }}
 							</div>
 							@enderror
 						</div>
@@ -43,7 +43,7 @@
 							{{-- при ошибке в валидации --}}
 							@error('content')
 							<div class="text-danger">
-								{{ __('Поле не заполнено либо заполнено неправильно') }}
+								{{ $message }}
 							</div>
 							@enderror
 						</div>
@@ -62,7 +62,7 @@
 							{{-- при ошибке в валидации --}}
 							@error('preview_image')
 							<div class="text-danger">
-								{{ __('Поле не заполнено либо заполнено неправильно') }}
+								{{ $message }}
 							</div>
 							@enderror
 						</div>
@@ -81,7 +81,7 @@
 							{{-- при ошибке в валидации --}}
 							@error('main_image')
 							<div class="text-danger">
-								{{ __('Поле не заполнено либо заполнено неправильно') }}
+								{{ $message }}
 							</div>
 							@enderror
 						</div>
