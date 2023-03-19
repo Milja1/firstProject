@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     /**
      * для получения данных из таблиц БД
-     * связанных с объектами методом: 
+     * связанных с объектами отношением: 
      */
     public function likedPosts()
     {
