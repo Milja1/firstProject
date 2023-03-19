@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\UserController;     // подключение
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * подключить страницу в app\Providers\RouteServiceProvider.php
+ */
+
 
 Route::prefix('admin')->/* middleware('auth', 'admin')-> */group(function () { 
 	Route::get('/', [MainController::class, 'index'])->name('admin.main.index');

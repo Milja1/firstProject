@@ -1,18 +1,17 @@
 <?php
 
-
-// use App\Http\Controllers\Resonal\CommentController;
-// use App\Http\Controllers\Resonal\LikedController;
-// use App\Http\Controllers\Resonal\MainController as ResonalMainController;
-
 use App\Http\Controllers\Personal\CommentController;
 use App\Http\Controllers\Personal\LikedController;
 use App\Http\Controllers\Personal\MainController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * подключить страницу в app\Providers\RouteServiceProvider.php
+ */
 
-Route::prefix('personal')->/*middleware('auth', 'verified')->*/group(function() {                  // добавили 'middleware' в порядке очередности проверки => 'auth' - проверка авторизован ли пользователь 'admin'
+
+Route::prefix('personal')->middleware('auth', 'verified')->group(function() {                  // добавили 'middleware' в порядке очередности проверки => 'auth' - проверка авторизован ли пользователь 'admin'
     //Route::prefix('main')->group(function() {                                                      //  'verified' - верификация персональных данных
         Route::get('/', [MainController::class, 'index'])->name('personal.main.index');
     //});
