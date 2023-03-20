@@ -19,8 +19,10 @@ class Post extends Model
     protected $table = 'posts';
     protected $guarded = false; // возможность вносить в поля таблицы изменения
 
-    protected $withCount = ['likedUsers'];  // количество лайков
-    protected $with = ['category'];         // оптимизация количества запросов !!!!!!!!!!!!! по методу category()
+    protected $withCount = ['likedUsers'];  // количество отношейний лайков к пользователю
+    
+	/* !!!!!!!!!!!!! для оптимизации количества запросов  необходима установка "telescope"	
+	protected $with = ['category'];  // по запросам с включеннием 'category' */        
 
     /**
      * для получения данных из таблиц БД

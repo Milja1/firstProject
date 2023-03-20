@@ -16,32 +16,64 @@
 		{{-- все посты --}}
 		<section class="featured-posts-section">
 			<div class="row">
+
+				{{-- изображение к посту --}}
 				@foreach($posts as $post)
-				<div class="col-md-4 fetured-post blog-post" data-aos="fade-up">
-					<div class="blog-post-thumbnail-wrapper">
-						<img src="{{ 'storage/' . $post->preview_image }}" alt="blog post">
-					</div>
-					<p class="blog-post-category">{{ $post->category->title }}</p>
-					<a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
-						<h6 class="blog-post-title">{{ $post->title }}</h6>
-					</a>
-				</div>
-				@endforeach
+                <div class="col-md-4 fetured-post blog-post" data-aos="fade-up">
+                    <div class="blog-post-thumbnail-wrapper">
+                        <img src="{{ 'storage/' . $post->preview_image }}" alt="blog post">
+                    </div>
+					{{-- лайки --}}
+                    <div class="d-flex justify-content-between">
+                        <p class="blog-post-category">{{ $post->category->title }}</p>
+                        
+						@auth()	{{-- проверка авторизации пользователя --}}
+
+                        <form action="{{ route('post.like.store', $post->id) }}" method="POST">
+                        @csrf
+							{{-- количество лайков --}}
+                            <span>{{ $post->liked_users_count}}</span>
+                            <button type="submit" class="border-0 bg-transparent">
+                               
+                            {{-- проверка есть ли в списке пролайканых постов пользователя соответсвующий пост --}}
+                            @if(auth()->user()->likedPosts->contains($post->id))
+                                <i class="fas fa-heart"></i>
+                            @else
+                                <i class="far fa-heart"></i>
+                            @endif
+
+                        @endauth
+
+                        @guest {{-- проверка регистрации пользователя --}}
+                            <div>
+                                <span>{{ $post->liked_users_count}}</span> {{-- показывает только количество лайков --}}
+                                <i class="far fa-heart"></i>
+                            </div>
+                        @endguest
+
+                            </button>
+                        </form>
+                    </div>
+
+					{{-- переход к просмотру поста при нажатии на название --}}
+                    <a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
+                        <h6 class="blog-post-title">{{ $post->title }}</h6>
+                    </a>
+                </div>
+                @endforeach
 
 				{{-- пагинация запускаем - php artisan vendor:publish --tag=laravel-pagination
 				 			подключаем в - app\Providers\AppServiceProvider.php --}}
-				<div class="row">
-					<div class="mx-auto" style="margin-top: -100px;">
-						{{ $posts->links() }}
-					</div>
-				</div>
+				
+				<div class="mx-auto" style="margin-top: -100px;">
+					{{ $posts->links() }}
+				</div>			
 
 			</div>
 		</section>
-
+		
 		<div class="row">
-
-			{{-- рандомные посты --}}
+			{{-- рандомные посты --}}			
 			<div class="col-md-8">
 				<section>
 					<div class="row blog-post-row">
