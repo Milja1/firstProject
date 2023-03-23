@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 
-Route::prefix('admin')->/* middleware('auth', 'admin')-> */group(function () { 
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () { 
 	Route::get('/', [MainController::class, 'index'])->name('admin.main.index');
 	/* 'middleware' в порядке очередности проверки:	
 		'auth' - проверка авторизован ли пользователь (создан по умолчанию см.  app\Http\Kernel.php)

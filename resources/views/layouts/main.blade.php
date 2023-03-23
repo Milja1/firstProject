@@ -1,4 +1,4 @@
-<!-- шаблон ГЛАВНОЙ (входа) стрицы -->
+<!-- шаблон ГЛАВНОЙ (входа) страницы -->
 
 <!-- 
     из  шаблона Edica https://www.bootstrapdash.com/ копируем:
@@ -13,80 +13,91 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edica :: Home</title>
-    <link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/font-awesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/aos/aos.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/loader.js') }}"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>firstProject</title>
+	<link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/font-awesome/css/all.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/vendors/aos/aos.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+	<script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
+	<script src="{{ asset('assets/js/loader.js') }}"></script>
 </head>
+
 <body>
-    <div class="edica-loader"></div>
-    <header class="edica-header">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="Edica"></a>
-                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+	<div class="edica-loader"></div>
+	<header class="edica-header">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<a class="navbar-brand" href="index.html"><img src="{{ asset('assets/images/logo.svg') }}" alt="Edica"></a>
+				<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#edicaMainNav" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
 				{{-- кнопки переходов --}}
-                <div class="collapse navbar-collapse" id="edicaMainNav">
-                    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">                       
+				<div class="collapse navbar-collapse" id="edicaMainNav">
+					<ul class="navbar-nav mx-auto mt-2 mt-lg-0">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('main.index') }}">{{ __('Блог') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">{{ __('Категории') }}</a>
-                        </li>
- 						<li class="nav-item">				
-						@auth()  {{-- если пользователь вошел то переводит в личный кабинет  --}}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('main.index') }}">{{ __('Блог') }}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('category.index') }}">{{ __('Категории') }}</a>
+						</li>
+
+						{{-- @auth('admin')
+							<li class="nav-item">							
+								<a class="nav-link" href="{{ route('admin.main.index') }}">{{ __('Администратор') }}</a>
+						</li>
+						@endauth --}}
+						@auth() {{-- если пользователь вошел то переводит в личный кабинет  --}}
+						<li class="nav-item">
 							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Личный кабинет') }}</a>
+						</li>
+						<li class="nav-item">
 							<form action="{{ route('logout') }}" method="POST">
-							@csrf
+								@csrf
 								<input class="btn btn-outline-primary" type="submit" value="{{ __('Выйти') }}">
 							</form>
+						</li>
 						@endauth
 						
 						@guest {{-- если пользователь не вошел то переводит на панель входа  --}}
+						<li class="nav-item">
 							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Войти') }}</a>
-						@endguest                     
-                        </li>
-						
-                    </ul>
+						</li>
+						@endguest
+					</ul>
 
-                </div>
-            </nav>
-        </div>
-    </header>
+				</div>
+			</nav>
+		</div>
+	</header>
 
-@yield('content')   <!-- расширение из resources\views\main\index.blade.php -->
-   
-   <footer class="py-3 border-top text-center">
+	@yield('content') <!-- расширение из resources\views\main\index.blade.php -->
 
-	{{-- вывод информации на всех или нескольких страницах  --}}
-	{{-- © {{ config('app.name') }} {{ date('Y') }}  стандартный вариант копирайта --}}
-FOOTER
-	{{-- © {{ config('app.name') }} {{ $date }}  (вывод даты через переменную осуществляется через -app\Providers\AppServiceProvider.php-) --}}
+	<footer class="py-3 border-top text-center">
 
-</footer>
+		{{-- вывод информации на всех или нескольких страницах  --}}
+		{{-- © {{ config('app.name') }} {{ date('Y') }} стандартный вариант копирайта --}}
+		FOOTER
+		{{-- © {{ config('app.name') }} {{ $date }} (вывод даты через переменную осуществляется через -app\Providers\AppServiceProvider.php-) --}}
 
-	
-    <script src="{{ asset('assets/vendors/popper.js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script>
-        AOS.init({
-            duration: 1000
-        });
-      </script>
+	</footer>
+
+
+	<script src="{{ asset('assets/vendors/popper.js/popper.min.js') }}"></script>
+	<script src="{{ asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/vendors/aos/aos.js') }}"></script>
+	<script src="{{ asset('assets/js/main.js') }}"></script>
+	<script>
+		AOS.init({
+			duration: 1000
+		});
+	</script>
 </body>
 
 </html>

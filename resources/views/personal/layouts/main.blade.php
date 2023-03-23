@@ -49,23 +49,19 @@
 					</li>
 				</ul>
 
-				{{-- добавить имя пользователя
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item active">{{ $user->name }}</li>
-					</ol>
-          		</div> --}}
-
-				{{-- кнопка "ВЫЙТИ" --}}
 				<ul class="navbar-nav">
+					{{-- кнопка "БЛОГ" --}}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ route('main.index') }}">{{ __('Блог') }}</a>
+					</li>
+					{{-- кнопка "ВЫЙТИ" --}}
 					<li class="nav-item">
 						<form action="{{ route('logout') }}" method="POST">
-						@csrf
+							@csrf
 							<input class="btn btn-outline-primary" type="submit" value="{{ __('Выйти') }}">
 						</form>
 					</li>
 				</ul>
-
 			</div>
 		</nav>
 

@@ -1,6 +1,7 @@
 {{-- ____ блок комментариев ____ страницы просмотра поста--}}
 
 {{-- блок просмотра комментариев --}}
+
 <section class="comment-list mb-5">
 	<h2 class="section-title mb-5" data-aos="fade-up">{{ __('Комментарии') }} ({{ $post->comments->count() }})</h2>
 	@foreach($post->comments as $comment)
@@ -18,8 +19,8 @@
 {{-- блок добавления комментариев --}}
 @auth() {{-- увидят форму только авторизованные пользователи --}}
 <section class="comment-section">
-	<h2 class="section-title mb-5" data-aos="fade-up">{{ __('Отправить комментарий') }}</h2>
-	<form action="{{ route('post.comment.store', $post->id) }}" method="post">
+	<h2 class="section-title mb-5" data-aos="fade-up">{{ __('Оставить комментарий') }}</h2>
+	<form action="{{ route('post.comment.store', $post->id) }}" method="post">   
 		@csrf
 		<div class="row">
 			<div class="form-group col-12" data-aos="fade-up">

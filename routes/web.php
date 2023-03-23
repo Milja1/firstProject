@@ -22,8 +22,7 @@ Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
 
     Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function() {       // вложенный маршрут Nested Route
         Route::post('/', 'StoreController')->name('post.like.store');
-    });
-   
+    });   
 }); 
 
 Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
