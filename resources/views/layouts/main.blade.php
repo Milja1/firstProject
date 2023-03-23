@@ -45,8 +45,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.index') }}">{{ __('Категории') }}</a>
                         </li>
-
-
  						<li class="nav-item">				
 						@auth()  {{-- если пользователь вошел то переводит в личный кабинет  --}}
 							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Личный кабинет') }}</a>

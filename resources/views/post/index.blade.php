@@ -33,8 +33,7 @@
                         @csrf
 							{{-- количество лайков --}}
                             <span>{{ $post->liked_users_count}}</span>
-                            <button type="submit" class="border-0 bg-transparent">
-                               
+                            <button type="submit" class="border-0 bg-transparent">                               
                             {{-- проверка есть ли в списке пролайканых постов пользователя соответсвующий пост --}}
                             @if(auth()->user()->likedPosts->contains($post->id))
                                 <i class="fas fa-heart"></i>
@@ -62,8 +61,7 @@
                 </div>
                 @endforeach
 
-				{{-- пагинация запускаем - php artisan vendor:publish --tag=laravel-pagination
-				 			подключаем в - app\Providers\AppServiceProvider.php --}}
+				{{-- пагинация запускаем - php artisan vendor:publish --tag=laravel-pagination подключаем в - app\Providers\AppServiceProvider.php --}}
 				
 				<div class="mx-auto" style="margin-top: -100px;">
 					{{ $posts->links() }}
