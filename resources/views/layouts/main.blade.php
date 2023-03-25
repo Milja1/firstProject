@@ -48,14 +48,12 @@
 							<a class="nav-link" href="{{ route('category.index') }}">{{ __('Категории') }}</a>
 						</li>
 
-						{{-- @auth('admin')
-							<li class="nav-item">							
-								<a class="nav-link" href="{{ route('admin.main.index') }}">{{ __('Администратор') }}</a>
-						</li>
-						@endauth --}}
 						@auth() {{-- если пользователь вошел то переводит в личный кабинет  --}}
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Личный кабинет') }}</a>
+						</li>
+						<li class="nav-item">							
+								<a class="nav-link" href="{{ route('admin.main.index') }}">{{ __('Кабинет администратора') }}</a>
 						</li>
 						<li class="nav-item">
 							<form action="{{ route('logout') }}" method="POST">
