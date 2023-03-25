@@ -18,6 +18,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>firstProject</title>
 	<link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/font-awesome/css/all.min.css') }}">
@@ -25,6 +26,12 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 	<script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/js/loader.js') }}"></script>
+	<script src="{{ asset('js/app.js') }}" defer></script>
+	<script defer src="https://code.jquery.com/jquery-3.6.4.js"
+			integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+			crossorigin="anonymous"></script>
+	<script src="{{ asset('js/addReview.js') }}"></script>
+
 </head>
 
 <body>

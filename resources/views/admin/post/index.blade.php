@@ -51,7 +51,7 @@
 								<td>{{ $post->id }}</td>
 								<td>{{ $post->title }}</td>
 								<td>
-									<a href="{{ route('post.show', $post->id) }}" class="btn btn-block btn-outline-primary btn-sm">
+									<a href="{{ route('post.show', $post->id) }}" class="btn btn-block btn-outline-primary btn-sm"> <!-- можно  route('admin.post.show', $post->id) -->
 										<i class="far fa-eye"></i>
 										{{ __('Просмотр') }}
 								</td>									
