@@ -6,12 +6,14 @@
 	<h2 class="section-title mb-5" data-aos="fade-up">{{ __('Комментарии') }} ({{ $post->comments->count() }})</h2>
 	@foreach($post->comments as $comment)
 	<div class="comment-text mb-3">
-		<span class="username">
-			<div> {{ $comment->user->name }} </div>
-			{{-- добавление времени поста атрибут создан в app\Models\Comment.php --}}
-			<span class="text-muted float-right">{{ $comment->dateAsCarbon->diffForHumans() }}</span>
+		<span>
+			<div> 
+			<p class="fw-bold"> {{ $comment->user->name }} </p>
+		</div>
 		</span>
 		{{ $comment->message }}
+		{{-- добавление времени поста атрибут создан в app\Models\Comment.php --}}
+		<div><span class="text-muted float-right">{{ $comment->dateAsCarbon->diffForHumans() }}</span></div> 
 	</div>
 	@endforeach
 </section>
@@ -25,12 +27,16 @@
 		<div class="row">
 			<div class="form-group col-12" data-aos="fade-up">
 				<label for="comment" class="sr-only"></label>
-				<textarea name="message" id="comment" class="form-control" placeholder="{{ __('Ваш комментарий') }}" rows="10"></textarea>
+<!--				
+				<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            	<input type="hidden" name="postt_id" id="post_id" value="{{ $post->id }}">
+-->
+				<textarea name="message" id="add_comment" class="form-control" placeholder="{{ __('Ваш комментарий') }}" rows="10"></textarea>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12" data-aos="fade-up">
-				<input type="submit" class="btn btn-warning btn-sm" value="{{ __('Добавить') }}">
+				<input type="submit" id="" class="btn btn-warning btn-sm" value="{{ __('Добавить') }}">
 			</div>
 		</div>
 	</form>

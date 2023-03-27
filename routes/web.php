@@ -32,7 +32,11 @@ Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
             Route::get('/', 'IndexController')->name('category.post.index');
     });
 
+Route::post('post/add-comment', [App\Http\Controllers\ReviewController::class, 'addComment']);
+
 });
+
+
 
 Auth::routes();
 

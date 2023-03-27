@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Personal;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;  // подключаем
-use App\Models\Post;      // подключаем
-use App\Models\Tag;       // подключаем
-use App\Models\User;      // подключаем
+use App\Models\PostUserLike;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * php artisan make:controller Resonal/MainController
@@ -14,14 +13,21 @@ use App\Models\User;      // подключаем
 
 class MainController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-		// $data = []; // в массив получаем количество действующих объектов из таблиц БД
-		// $data['usersCount'] = User::all()->count(); 
-		// $data['postsCount'] = Post::all()->count();
-		// $data['categoriesCount'] = Category::all()->count();
-		// $data['tagsCount'] = Tag::all()->count();
+		$user = Auth::user()->id;
+
+		$countComments = DB::table('comments')
+        ->where('user_id', '=', $user)
+        ->get()
+		->count();
+
+		$countLikes = PostUserLike::where('user_id', '=', $user)
+		->get()
+		->count();
+		//dd($countLikes);
+		
 				
-        return view('personal.main.index'/* , compact('data') */);
+        return view('personal.main.index', compact('countComments', 'countLikes'));
     }
 }

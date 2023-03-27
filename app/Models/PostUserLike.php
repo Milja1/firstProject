@@ -16,4 +16,6 @@ class PostUserLike extends Model
     
     protected $table = 'post_user_likes';
     protected $guarded = false; // возможность вносить в поля таблицы изменения
+
+	
 }

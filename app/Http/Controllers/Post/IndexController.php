@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function __invoke()
 	{		
-	    $posts = Post::paginate(3);     // получение постов из БД
+	    $posts = Post::paginate(6);     // получение постов из БД
         $randomPosts = Post::get()->random(2);       // получение рандомных постов из БД
 
         // получение количества лайков для каждого поста ('DESC' - по убыванию)
