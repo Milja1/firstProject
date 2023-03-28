@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Personal;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 
-/**
- * php artisan make:controller Resonal/LikedController --resource
- */
 
 class LikedController extends Controller
 {

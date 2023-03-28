@@ -7,12 +7,12 @@ use App\Models\PostUserLike;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-/**
- * php artisan make:controller Resonal/MainController
- */
 
 class MainController extends Controller
 {
+	/**
+	 * корличество likes и comments пользователя в личном кабинете 
+	 */
     public function index()
     {
 		$user = Auth::user()->id;
@@ -25,9 +25,7 @@ class MainController extends Controller
 		$countLikes = PostUserLike::where('user_id', '=', $user)
 		->get()
 		->count();
-		//dd($countLikes);
-		
-				
+						
         return view('personal.main.index', compact('countComments', 'countLikes'));
     }
 }

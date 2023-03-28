@@ -20,14 +20,6 @@ class IndexController extends Controller
 	 */
     public function __invoke()
     {
-		/* $posts = Post::paginate(3);                         // все посты с пагинацией по 6 шт
-		$randomPosts = Post::get()->random(2);              // рандомные посты 2 шт
-		
-		// посты с наибольшим количество лайков    -> сортируем, по убывающей            -> получаем -> 3 шт            
-		$likedPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(3); 
-
-        return view('main.index', compact('posts', 'randomPosts', 'likedPosts')); */
-
 		return redirect()->route('post.index');
     }
 }

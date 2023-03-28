@@ -9,9 +9,6 @@ use App\Models\User;                            // подключаем
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * php artisan make:controller Admin/UserController --resource
- */
 
 class UserController extends Controller
 {
@@ -20,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();           // получаем из БД список всех пользователей
-		return view('admin.user.index', compact('users')); // полученный список передаем на страницу для вывода
+        $users = User::all();
+		return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -29,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-		$roles = User::getRoles();                          // получаем список ролей из 'users' методом из app\Models\User.php
+		$roles = User::getRoles();    
 		return view('admin.user.create', compact('roles'));
     }
 
@@ -57,7 +54,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-		$roles = User::getRoles();                          // получаем список ролей из 'users' методом из app\Mod = User::getRoles();                          // получаем список ролей из 'users' методом из app\Mod
+		$roles = User::getRoles();                          // получаем список ролей из 'users' методом из app\Mod = User::getRoles();
         
 		return view('admin.user.edit', compact('user', 'roles'));
     }

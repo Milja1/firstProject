@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Category\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Post;
+
 
 /**
- * php artisan make:controller Main/IndexController
- * создание текущего контроллера в папке Main
+ * для страницы визуального отображения постов по категориям
  */
-
-
 class IndexController extends Controller
 {
-    public function __invoke(Category $category)  // метод (функция) вызываемая по умолчанию т.е. без ссылок
+    public function __invoke(Category $category)
     {
         $posts = $category->posts()->paginate(3);     
         

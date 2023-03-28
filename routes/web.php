@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['namespace' => 'Main'], function() {
-    Route::get('/', 'IndexController')->name('main.index'); // без указания метода контроллера т.к. он однометодный
+    Route::get('/', 'IndexController')->name('main.index');
 });
 Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
     Route::get('/', 'IndexController')->name('post.index');
@@ -28,15 +28,13 @@ Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
 Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
     Route::get('/', 'IndexController')->name('category.index');
 
-    Route::group(['namespace' => 'Post', 'prefix' => '{category}/posts'], function() {                   // вложенный маршрут Nested Route
+    Route::group(['namespace' => 'Post', 'prefix' => '{category}/posts'], function() {    // вложенный маршрут Nested Route
             Route::get('/', 'IndexController')->name('category.post.index');
     });
 
 Route::post('post/add-comment', [App\Http\Controllers\ReviewController::class, 'addComment']);
 
 });
-
-
 
 Auth::routes();
 

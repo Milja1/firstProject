@@ -2,76 +2,76 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\BaseController;
-use App\Http\Requests\Admin\Posts\StoreRequest;  // подключение
-use App\Http\Requests\Admin\Posts\UpdateRequest; // подключение
+use App\Http\Requests\Admin\Posts\StoreRequest;
+use App\Http\Requests\Admin\Posts\UpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\Tag;  // подключение
-use Exception;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Tag;
+
 
 /**
- * php artisan make:controller Admin/PostController --resource
- * 
- * т.к. применяется используется класс PostService
- * изменяем extends (наследование) от BaseController
+ * т.к. обработка данных осуществляется с использованием app\Service\PostService.php
+ * изменяем extends (наследование) от BaseController, инициализурующим класс PostService
  */
 
 class PostController extends BaseController
 {
     /**
-     * просмотр всех постов
+     * просмотр списка постов
      */
     public function index()
     {
-        $posts = Post::all(); // получаем из таблицы БД список всех категорий
-		return view('admin.post.index', compact('posts')); // передаем его для вывода на странице по Route
+        $posts = Post::paginate(6);
+		return view('admin.post.index', compact('posts'));
     }
 
     /**
-     * создание поста
+     * отображение списка имеющихся категорий и тегов 
+	 * в форме создания поста
      */
     public function create()
     {
-		$categories = Category::all();                             // получаем все категории из таблицы базы данных
-        $tags = Tag::all();                                        // получаем все теги из таблицы базы данных
-        return view('admin.post.create', compact('categories', 'tags'));   // передаем их для отображения на стр. resources\views\admin\post\create.blade.php
+		$categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
-     * добавление поста в БД
+     * реализация добавления в БД данных данных отдельного поста, 
+	 * обработанных с помощью метода 'store' из app\Service\PostService.php
      */
     public function store(StoreRequest $request)
     {   
 		$data = $request->validated();
-		$this->service->store($data);   // обрабатываем полученныеы из БД данные с помощью метода 'store' из app\Service\PostService.php
+		$this->service->store($data);
 		
-        return redirect()->route('admin.post.index');      // переадресация
+        return redirect()->route('admin.post.index');
     }
 
     /**
-     * просмотр одного поста
+     * просмотр отдельного поста
      */
     public function show(Post $post)
     {
-        return view('admin.post.show', compact('post')); // передаем для вывода на странице отдельную категорию  по Route
+        return view('admin.post.show', compact('post'));
     }
 
     /**
-     * редактирование одного поста
+	 * отображение списка имеющихся категорий и тегов 
+	 * в форме редактирования поста
      */
     public function edit(Post $post)
     {
-		$categories = Category::all();                             // получаем все категории из таблицы базы данных
-        $tags = Tag::all();                                        // получаем все теги из таблицы базы данных
+		$categories = Category::all();
+        $tags = Tag::all();
 
         return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
-     * сохранение изменений поста в БД
+     * реализация редактирования в БД данных отдельного поста, 
+	 * обработанных с помощью метода 'update' из app\Service\PostService.php
      */
     public function update(UpdateRequest $request, Post $post)
     {

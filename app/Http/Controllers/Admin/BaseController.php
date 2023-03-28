@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Service\PostService;       // подключаем
 
 /**
- * php artisan make:controller Admin/BaseController
  * создан для инициализации класса PostService в app\Service\PostService.php
  */
 
