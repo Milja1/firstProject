@@ -3,25 +3,27 @@
 namespace App\Http\Controllers\Personal;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Http\Requests\Personal\UpdateRequest as PersonalUpdateRequest;
 use App\Models\Comment;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-/**
- * php artisan make:controller Resonal/CommentController --resource
- */
 
 class CommentController extends Controller
 {
 	/**
-	 * из таблицы БД получаем комментарии только
+	 * просмотр данных всех комментариев
 	 * аутентифицированного пользователя делающего запрос
 	 */
     public function index()
     {
-        $comments = auth()->user()->comments;   // с помощью метода comments из app\Models\User.php        
-               
+		$user = Auth::user()->id;
+		$comments = DB::table('comments')
+        ->where('user_id', '=', $user)		
+        ->paginate(5);
+		
+		//$comments = auth()->user()->comments;   // можно с помощью метода comments из app\Models\User.php - не получилась пагинация ????       
+		
         return view('personal.comment.index', compact('comments'));
     }
 
@@ -49,7 +51,7 @@ class CommentController extends Controller
 	 */
     public function delete(Comment $comment)
     {
-        $comment->delete();   // с помощью метода delete() удаляем комментарий        
+        $comment->delete();        
      
         return redirect()->route('personal.comment.index');
     }

@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function __invoke()
 	{		
-	    $posts = Post::paginate(6);                  // получение постов из БД
+	    $posts = Post::paginate(6);
         $randomPosts = Post::get()->random(2);       // рандомные посты
         // посты с наибольшим количеством лайков ('DESC' - по убыванию)
         $likedPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(3); // через метод likedUsers из app\Models\Post.php (take(3) три лучших поста)
