@@ -57,7 +57,7 @@
 
 						@auth() {{-- если пользователь вошел то переводит в личный кабинет  --}}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Личный кабинет') }}</a>
+							<a class="nav-link" href="{{ route('personal.main.index') }}">{{ __('Личный кабинет') }}: <span class="text-primary"> {{ auth()->user()->name }}</span></a>
 						</li>
 						<li class="nav-item">							
 								<a class="nav-link" href="{{ route('admin.main.index') }}">{{ __('Кабинет администратора') }}</a>
@@ -67,7 +67,7 @@
 								@csrf
 								<input class="btn btn-outline-primary" type="submit" value="{{ __('Выйти') }}">
 							</form>
-						</li>
+						</li>						
 						@endauth
 						
 						@guest {{-- если пользователь не вошел то переводит на панель входа  --}}

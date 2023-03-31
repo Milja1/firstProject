@@ -50,13 +50,19 @@
 				</ul>
 
 				<ul class="navbar-nav">
-					{{-- кнопка "БЛОГ" --}}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('main.index') }}">{{ __('Блог') }}</a>
+						<p class="nav-link text-primary">{{ auth()->user()->name }}</p>
+					</li>
+					{{-- кнопка "БЛОГ" --}}					
+					<li class="nav-item">
+						<form action="{{route('main.index') }}" method="GET">
+							@csrf
+							<input class="btn btn-info" type="submit" value="{{ __('Блог') }}">
+						</form>
 					</li>
 					{{-- кнопка "ВЫЙТИ" --}}
 					<li class="nav-item">
-						<form action="{{ route('logout') }}" method="POST">
+						<form action="{{ route('logout') }}" method="GET">
 							@csrf
 							<input class="btn btn-outline-primary" type="submit" value="{{ __('Выйти') }}">
 						</form>

@@ -16,11 +16,11 @@ class StoreController extends Controller
 {
     public function __invoke(Post $post, StoreRequest $request)  // метод (функция) вызываемая по умолчанию т.е. без ссылок
     {
-        $data = $request->validated();      // получение значений из формы добавления комментария под постом 
+       /*  $data = $request->validated();       // получение значений из формы добавления комментария под постом 
         $data['user_id'] = auth()->user()->id;  // id авторизованного пользователя отправившего коментарий 
-        $data['post_id'] = $post->id;  // id поста к оторому добавлен коментарий 
-        Comment::create($data);               // передача массива значений в БД
+        $data['post_id'] = $post->id;           // id поста к оторому добавлен коментарий 
+        Comment::create($data);                 // передача массива значений в БД
 
-        return redirect()->route('post.show', $post->id);
+        return redirect()->route('post.show', $post->id); */
     }
 }

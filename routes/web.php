@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Post\Comment\StoreController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +17,11 @@ Route::group(['namespace' => 'Main'], function() {
 Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function() {
     Route::get('/', 'IndexController')->name('post.index');
     Route::get('/{post}', 'ShowController')->name('post.show');
+	Route::post('{post}/comments', [ReviewController::class, 'addComment']);
 
-    Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function() { // вложенный маршрут Nested Route
+ /*  Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function() { // вложенный маршрут Nested Route
         Route::post('/', 'StoreController')->name('post.comment.store');
-    });
+    }); */
 
     Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function() {       // вложенный маршрут Nested Route
         Route::post('/', 'StoreController')->name('post.like.store');
@@ -32,9 +35,9 @@ Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function() {
             Route::get('/', 'IndexController')->name('category.post.index');
     });
 
-Route::post('post/add-comment', [App\Http\Controllers\ReviewController::class, 'addComment']);
-
 });
+
+Route::post('posts/{post}/comments', [App\Http\Controllers\ReviewController::class, 'addComment']);
 
 Auth::routes();
 
