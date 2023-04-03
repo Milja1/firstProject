@@ -19,7 +19,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AdminLTE 3 | Dashboard</title>
-
+	<script src="https://cdn.tailwindcss.com"></script>
+	
+	
+	<link href="/dist/output.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -28,7 +31,9 @@
 	<link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+	@livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -48,7 +53,7 @@
 					</li>
 				</ul>
 
-				{{-- кнопка "ВЫЙТИ" --}}
+				{{-- кнопки --}}
 				<ul class="navbar-nav">
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('main.index') }}">{{ __('Блог') }}</a>
@@ -66,9 +71,13 @@
 
 		@include('admin.includes.sidebar') <!-- вставка из resources\views\admin\includes\sidebar.blade.php -->
 
-		@yield('content') <!-- расширение из resources\views\admin\main\index.blade.php -->
 
-		<footer class="main-footer">
+		@yield('content') {{-- расширение из resources\views\admin\main\index.blade.php --}}
+
+
+
+		
+ <footer class="main-footer">
 			<strong>Blog</strong>
 		</footer>
 
@@ -79,7 +88,8 @@
 		<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
-
+	
+	
 	<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -118,7 +128,7 @@
 			content: "...";
 		}
 	</style>
-
+	@livewireScripts
 </body>
 
 </html>

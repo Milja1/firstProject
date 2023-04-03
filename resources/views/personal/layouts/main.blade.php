@@ -51,7 +51,7 @@
 
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<p class="nav-link text-primary">{{ auth()->user()->name }}</p>
+						<h4 class="nav-link">{{ auth()->user()->name }}</h4>
 					</li>
 					{{-- кнопка "БЛОГ" --}}					
 					<li class="nav-item">
@@ -64,7 +64,7 @@
 					<li class="nav-item">
 						<form action="{{ route('logout') }}" method="GET">
 							@csrf
-							<input class="btn btn-outline-primary" type="submit" value="{{ __('Выйти') }}">
+							<input class="btn btn-outline-primary ml-3" type="submit" value="{{ __('Выйти') }}">
 						</form>
 					</li>
 				</ul>

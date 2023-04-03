@@ -1,8 +1,8 @@
-<!-- расширение 'просмотр списка КАТЕГОРИЙ' в шаблон страницы (входа) административной панели resources\views\admin\layouts\main.blade.php -->
+{{-- расширение 'просмотр списка КАТЕГОРИЙ' в шаблон страницы административной панели resources\views\admin\layouts\main.blade.php --}}
+ 
+@extends('admin.layouts.main') {{-- подключение к странице шаблона --}}
 
-@extends('admin.layouts.main') <!-- подключение к странице шаблона -->
-
-@section('content') <!-- вставка в страницу шаблона -->
+@section('content') {{-- расширение страницы шаблона --}}
 
 <div class="content-wrapper">
   	<div class="content-header">
@@ -21,6 +21,9 @@
     	</div>
   	</div>
 
+	  @livewire('categories') {{-- подключение компонента livewire для асинхронных запросов --}}
+
+{{--  ____________ для СИНХРОННЫХ ЗАПРОСОВ _______________
   	<section class="content">
     	<div class="container-fluid">
 
@@ -82,7 +85,7 @@
 		</div>
 
   	</section>
+--}}
 
 </div>
-
 @endsection

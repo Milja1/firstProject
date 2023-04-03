@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
 		Carbon::setLocale('ru_RU');      // перевод даты на русский язык 
         Paginator::useBootstrap();       // добавляем для пагинации
+		
     }
 }

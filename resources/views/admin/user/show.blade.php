@@ -1,40 +1,27 @@
-<!-- расширение 'просмотр одного ПОЛЬЗОВАТЕЛЯ' в шаблон страницы (входа) административной панели resources\views\admin\layouts\main.blade.php -->
+{{-- расширение 'просмотр ПОЛЬЗОВАТЕЛЯ'в шаблон страницы административной панели resources\views\admin\layouts\main.blade.php --}}
 
-@extends('admin.layouts.main') <!-- подключение к странице шаблона -->
+@extends('admin.layouts.main') {{-- подключениекстраницешаблона --}}
 
-@section('content') <!-- вставка в страницу шаблона -->
+@section('content') {{-- расширение шаблона страницы --}}
 
 <div class="content-wrapper">
 	<div class="content-header">
-    	<div class="container-fluid">
+		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6 d-flex">
 					<h1 class="m-0 mr-2"> {{ $user->name }}</h1>
-					<a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-block btn-success col-3">
-						<i class="fas fa-pen-nib"></i>
-						{{ __('Редактировать') }}                     
-					</a>
-					<form action="{{ route('admin.user.delete', $user->id) }}" method="POST">
-					@csrf
-					@method('DELETE') <!-- т.к. метод передачи запроса не GET и не POST -->
-						<button type="submit" class="btn btn-block btn-danger">
-							<i class="fas fa-trash"></i>
-							{{ __('Удалить') }}
-						</button>  
-					</form>   	
 				</div>
 				<div class="col-sm-6">
-				<ol class="breadcrumb float-sm-right">
+					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="{{ route('admin.main.index') }}">{{ __('Главная') }}</a></li>
 						<li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">{{ __('Пользователи') }}</a></li>
-						<li class="breadcrumb-item active">{{ $user->name }}</li>
-          			</ol>
+					</ol>
 				</div>
 			</div>
-    	</div>
-  	</div>
+		</div>
+	</div>
 
-  	<section class="content">
+	<section class="content">
 		<div class="container-fluid">
 
 			<!-- таблица -->
@@ -47,11 +34,19 @@
 								<tbody>
 									<tr>
 										<td>ID</td>
-										<td>{{ $user->id }}</td>
-									<tr>										
-									</tr>	
-										<td>{{ __('Имя') }}</td>
-										<td>{{ $user->name }}</td>
+										<td>{{ $user->id }}</td>									
+									</tr>
+									<tr>
+									<td>{{ __('Имя') }}</td>
+									<td>{{ $user->name }}</td>
+									</tr>
+									<tr>
+									<td>{{ __('Адрес электронной почты') }}</td>
+									<td>{{ $user->email }}</td>
+									</tr>
+									<tr>
+									<td>{{ __('Дата регистрации') }}</td>
+									<td>{{ $user->created_at }}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -62,7 +57,7 @@
 			</div>
 
 		</div>
-  	</section>
+	</section>
 
 </div>
 
